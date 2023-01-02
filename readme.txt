@@ -23,7 +23,7 @@ To be able to use the Notch Pay for Give plugin, you must [have an business acco
 Use the Notch Pay dashboard to manage your customers, payments, and track your growth.
  
 = Fraud Protection =
-For NotchPay, stopping fraud is top priority. We've used machine learning to minimize risks, reduce chargebacks and its associated costs. Notch Pay's fraud systems is built to learn. And so it's continually adapting to both local and international fraud.
+For Notch Pay, stopping fraud is top priority. We've used machine learning to minimize risks, reduce chargebacks and its associated costs. Notch Pay's fraud systems is built to learn. And so it's continually adapting to both local and international fraud.
  
 We screen every transaction by checking the IP, history, geolocation etc. to proactively identify fraudulent transactions. The entire network is used to prevent fraud. We learn from card and device fingerprints used to pay across different merchants.
  
@@ -34,20 +34,20 @@ We've done all the heavy lifting such that you can immediately start accepting p
  
 When you download Notch Pay, you join a community of more than ten 100+ merchants, developers, and enthusiasts. We're one of the fastest-growing open source communities online, and no matter your skill level we'd love to have you!
  
-If you’re interested in contributing to Notch Pay plugins and libraries we’ve got more than 100 contributors, and there’s always room for more. Head over to the [NotchPay GitHub Repository](https://github.com/notchpay/) to find out how you can pitch in.
+If you’re interested in contributing to Notch Pay plugins and libraries we’ve got more than 100 contributors, and there’s always room for more. Head over to the [Notch Pay GitHub Repository](https://github.com/notchpay/) to find out how you can pitch in.
   
 == Installation ==
  
 = Minimum Requirements =
  
-* Confirm that your server can conclude a TLSv1.2 connection to NotchPay's servers. More information about this requirement can be gleaned here: [TLS v1.2 requirement](https://developers.notchpay.co/blog/tls-v12-requirement).
+* Confirm that your server can conclude a TLSv1.2 connection to Notch Pay's servers. More information about this requirement can be gleaned here: [TLS v1.2 requirement](https://developers.notchpay.co/blog/tls-v12-requirement).
 * Minimum PHP requirements is PHP 5.6
  
 = Automatic installation =
  
-Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t need to leave your web browser. To do an automatic install of NotchPay Payment for Give, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
+Automatic installation is the easiest option as WordPress handles the file transfers itself and you don’t need to leave your web browser. To do an automatic install of Notch Pay Payment for Give, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
  
-In the search field type “NotchPay for Give” and click Search Plugins. Once you’ve found our payment plugin you can view details about it such as the point release, rating and description. Most importantly of course, you can install it by simply clicking “Install Now”.
+In the search field type “Notch Pay for Give” and click Search Plugins. Once you’ve found our payment plugin you can view details about it such as the point release, rating and description. Most importantly of course, you can install it by simply clicking “Install Now”.
  
 = Manual installation =
  
@@ -56,7 +56,7 @@ The manual installation method involves downloading our payment plugin and uploa
  
 == Frequently Asked Questions ==
  
-= Where can I find help and documentation to understand NotchPay? =
+= Where can I find help and documentation to understand Notch Pay? =
  
 You can find help and information on Notch Pay on our [Help Desk](https://notchpay.co/help)
  

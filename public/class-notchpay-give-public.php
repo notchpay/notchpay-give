@@ -18,7 +18,7 @@
  *
  * @package    NotchPay_Give
  * @subpackage NotchPay_Give/public
- * @author     NotchPay <hello@notchpay.com>
+ * @author     Notch Pay <hello@notchpay.com>
  */
 class NotchPay_Give_Public
 {

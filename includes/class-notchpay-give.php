@@ -26,7 +26,7 @@
  * @since      1.0.0
  * @package    NotchPay_Give
  * @subpackage NotchPay_Give/includes
- * @author     NotchPay <hello@notchpay.com>
+ * @author     Notch Pay <hello@notchpay.com>
  */
 
 class give_notchpay_plugin_tracker
@@ -221,8 +221,8 @@ class NotchPay_Give
         function give_notchpay_register_gateway($gateways)
         {
             $gateways['notchpay'] = array(
-                'admin_label' => esc_attr__('NotchPay', 'notchpay-give'),
-                'checkout_label' => esc_attr__('NotchPay', 'notchpay-give'),
+                'admin_label' => esc_attr__('Notch Pay', 'notchpay-give'),
+                'checkout_label' => esc_attr__('Notch Pay', 'notchpay-give'),
             );
             return $gateways;
         }
