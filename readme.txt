@@ -17,7 +17,7 @@ Give is one the foremost WordPress donation plugins. It's robust, flexible, and 
 
 The **Notch Pay for Give** allows site owners from Nigeria, Ghana, South Africa and Kenya to accept payments from their customers, anywhere.
 
-To be able to use the Notch Pay for Give plugin, you must [have an business account on Notch Pay](https://business.notchpay.com/) from which you will get Test and Live API keys to connect the plugin to your Notch Pay business.
+To be able to use the Notch Pay for Give plugin, you must [have an business account on Notch Pay](https://business.notchpay.co/) from which you will get Test and Live API keys to connect the plugin to your Notch Pay business.
 
 = Intuitive Dashboard =
 Use the Notch Pay dashboard to manage your customers, payments, and track your growth.
