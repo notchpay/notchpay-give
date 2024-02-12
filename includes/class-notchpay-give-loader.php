@@ -19,7 +19,7 @@
  *
  * @package    NotchPay_Give
  * @subpackage NotchPay_Give/includes
- * @author     Notch Pay <hello@notchpay.com>
+ * @author     Notch Pay <hello@notchpay.co>
  */
 class NotchPay_Give_Loader
 {

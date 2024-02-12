@@ -8,11 +8,13 @@
  *
  * @package    Give
  * @subpackage Gateways
- * @author     Chapdel KAMGA<chapdel@notchpay.co>
+ * @author     Chapdel KAMGA <chapdel@notchpay.co>
  * @license    https://opensource.org/licenses/gpl-license GNU Public License
  * @link       https://notchpay.co
  * @since      1.0.0
  */
+
+use Give\Framework\PaymentGateways\Commands\RespondToBrowser;
 
 /**
  * The core plugin class.
@@ -26,7 +28,7 @@
  * @since      1.0.0
  * @package    NotchPay_Give
  * @subpackage NotchPay_Give/includes
- * @author     Notch Pay <hello@notchpay.com>
+ * @author     Notch Pay <hello@notchpay.co>
  */
 
 class give_notchpay_plugin_tracker
@@ -113,8 +115,8 @@ class NotchPay_Give
      */
     public function __construct()
     {
-        if (defined('PLUGIN_NAME_VERSION')) {
-            $this->version = PLUGIN_NAME_VERSION;
+        if (defined('NP_GIVE_PLUGIN_NAME_VERSION')) {
+            $this->version = NP_GIVE_PLUGIN_NAME_VERSION;
         } else {
             $this->version = '1.0.0';
         }
@@ -299,16 +301,11 @@ class NotchPay_Give
         function give_process_notchpay_purchase($purchase_data)
         {
 
-
-
-
-
             // Make sure we don't have any left over errors present.
             give_clear_errors();
 
             // Any errors?
             $errors = give_get_errors();
-
             if (!$errors) {
 
                 $form_id         = intval($purchase_data['post_data']['give-form-id']);
@@ -332,12 +329,10 @@ class NotchPay_Give
                 // Record the pending payment
                 $payment = give_insert_payment($payment_data);
 
-
-
                 if (!$payment) {
                     // Record the error
 
-                    give_record_gateway_error(__('Payment Error', 'give'), sprintf(__('Payment creation failed before sending donor to Notch Pay. Payment data: %s', 'give'), json_encode($payment_data)), $payment);
+                    give_record_log(__('Payment Error', 'give'), sprintf(__('Payment creation failed before sending donor to Notch Pay. Payment data: %s', 'give'), json_encode($payment_data)), $payment);
                     // Problems? send back
                     give_send_back_to_checkout('?payment-mode=' . $purchase_data['post_data']['give-gateway'] . "&message=-some weird error happened-&payment_id=" . json_encode($payment));
                 } else {
@@ -350,14 +345,13 @@ class NotchPay_Give
                         $public_key = give_get_option('notchpay_live_public_key');
                     }
 
-
-
                     $ref = $purchase_data['purchase_key']; // . '-' . time() . '-' . preg_replace("/[^0-9a-z_]/i", "_", $purchase_data['user_email']);
                     $currency = give_get_currency();
 
                     $verify_url = home_url() . '?' . http_build_query(
                         [
-                            NotchPay_Give::API_QUERY_VAR => 'verify'
+                            NotchPay_Give::API_QUERY_VAR => 'verify',
+                            'reference' => $ref,
                         ]
                     );
 
@@ -365,25 +359,11 @@ class NotchPay_Give
                     $url = "https://api.notchpay.co/payments/initialize";
                     $fields = [
                         'email' => $payment_data['user_email'],
+                        'name' =>  isset($payment_data['user_info'])?  (isset($payment_data['user_info']['first_name']) ? $payment_data['user_info']['first_name'] : null ) : null,
                         'amount' => $payment_data['price'],
                         'reference' => $ref,
                         'callback' => $verify_url,
-                        'type' => "heart-donation",
                         'currency' => $currency,
-                        'metadata' => [
-                            'custom_fields' => [
-                                [
-                                    'display_name' => 'Form Title',
-                                    'variable_name' => 'form_title',
-                                    'value' => $payment_data['give_form_title']
-                                ],
-                                [
-                                    'display_name' => 'Plugin',
-                                    'variable_name' => 'plugin',
-                                    'value' => 'give'
-                                ]
-                            ]
-                        ]
 
                     ];
                     $fields_string = http_build_query($fields);
@@ -405,10 +385,16 @@ class NotchPay_Give
                     //execute post
                     $result = curl_exec($ch);
                     $json_response = json_decode($result, true);
-                    if (isset($json_response['status']) && $json_response['code'] == 201) {
+                    give_insert_payment_note($payment, 'ERROR: fdfddffddf');
+
+
+                    if ($json_response['status'] && $json_response['code'] == 201) {
                         wp_redirect($json_response['authorization_url']);
                         exit;
-                    } else {
+                    } else if($json_response['status'] && $json_response['code'] == 422) {
+                        // todo: show error message
+                        give_send_back_to_checkout('?payment-mode=notchpay' . '&error=' . $json_response['message']);
+                    }else {
                         give_send_back_to_checkout('?payment-mode=notchpay' . '&error=' . $json_response['message']);
                     }
                     //--------------
@@ -419,7 +405,6 @@ class NotchPay_Give
                 give_send_back_to_checkout('?payment-mode=notchpay' . '&errors=' . json_encode($errors));
             }
         }
-
 
         add_action('give_gateway_notchpay', 'give_process_notchpay_purchase');
     }
@@ -475,15 +460,17 @@ class NotchPay_Give
             die('not a valid response');
         }
 
+
+
         $give_ref = $_GET['notchpay_trxref'];
         $ref = $_GET['reference'];
         $status = $_GET['status'];
         $payment = give_get_payment_by('key', $give_ref);
+        // die(json_encode($payment));
 
         if ($payment === false) {
             die('not a valid ref');
         }
-
         if (give_is_test_mode()) {
             $public_key = give_get_option('notchpay_test_public_key');
         } else {
@@ -500,17 +487,11 @@ class NotchPay_Give
 
         $request = wp_remote_get($url, $args);
 
-
-
         if (is_wp_error($request)) {
-
             return false; // Bail early
         }
 
-
-
         $body = wp_remote_retrieve_body($request);
-
 
         $result = json_decode($body);
 
@@ -529,12 +510,16 @@ class NotchPay_Give
             $pstk_logger->log_transaction_success($ref);
             //
 
+
             // the transaction was successful, you can deliver value
 
             give_update_payment_status($payment->ID, 'complete');
-
-
-
+            //             echo json_encode(
+            //                 [
+            //                     'url' => give_get_success_page_uri(),
+            //                     'status' => 'given',
+            //                 ]
+            //             );
             wp_redirect(give_get_success_page_uri());
             exit;
         } else {
@@ -550,21 +535,13 @@ class NotchPay_Give
                     $error_message = "Payment failed on Notch Pay";
                     break;
             }
-
-            // fix data
-
+            
             // the transaction was not successful, do not deliver value'
             give_update_payment_status($payment->ID, 'failed');
+            give_insert_payment_note($payment, 'ERROR: ' . $error_message);
+
             wp_redirect(give_get_failed_transaction_uri());
             exit;
-            /* give_insert_payment_note($payment, 'ERROR: ' . $error_message);
-            echo json_encode(
-                [
-                    'status' => 'not-given',
-                    'comment_content' => $error_message,
-                    'message' => "Transaction was not successful: Last gateway response was: " . $error_message,
-                ]
-            ); */
         }
     }
 }

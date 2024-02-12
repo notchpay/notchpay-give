@@ -16,7 +16,7 @@
  * Plugin Name:       Notch Pay for Give
  * Plugin URI:        http://wordpress.org/plugins/notchpay-give
  * Description:       Notch Pay integration for accepting donation with local payments and mobile money
- * Version:           1.0.0
+ * Version:           1.0.1
  * Author:            Notch Pay
  * Author URI:        https://notchpay.co
  * License:           GPL-2.0+
@@ -35,10 +35,7 @@ if (!defined('WPINC')) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-if (!defined('PLUGIN_NAME_VERSION')) {
-    define('PLUGIN_NAME_VERSION', '1.0.0');
-}
-
+define('NP_GIVE_PLUGIN_NAME_VERSION', '2.0.0');
 
 /**
  * The code that runs during plugin activation.

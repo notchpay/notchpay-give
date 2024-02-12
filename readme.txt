@@ -1,10 +1,10 @@
-=== Notch Pay for Give ===
+=== Notch Pay Payment for Give ===
 Contributors: notchpay, chapdel
 Donate link: https://notchpay.co/donate
 Tags: give, notchpay, payment, donation,mobilemoney,orangemoney
 Requires at least: 3.0.1
-Tested up to: 5.9
-Stable tag: 1.0.0
+Tested up to: 6.4
+Stable tag: 1.0.1
 Requires PHP: 5.6 and higher
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -58,7 +58,7 @@ The manual installation method involves downloading our payment plugin and uploa
  
 = Where can I find help and documentation to understand Notch Pay? =
  
-You can find help and information on Notch Pay on our [Help Desk](https://notchpay.co/help)
+You can find help and information on Notch Pay on our [Help Desk](https://support.notchpay.co)
  
 = Where can I get support or talk to other users? =
  
@@ -68,12 +68,7 @@ If you get stuck, you can ask for help in the [Notch Pay for Give Plugin Forum](
  
 Yes you can! Join in on our [GitHub repository](https://github.com/notchpay/notchpay-give) :)
 
-
-== Changelog ==
-
+= 1.0.1 =
+* Compatibility with WordPress 6.4 and PHP 8
 = 1.0.0 =
 * First release
- 
-== Screenshots ==
- 
-1. The slick Notch Pay settings panel.

@@ -5,7 +5,7 @@
  *
  * @package    Give
  * @subpackage Gateways
- * @author     Chapdel KAMGA<chapdel@notchpay.co>
+ * @author     Stephen Amaza <steve@notchpay.com>
  * @license    https://opensource.org/licenses/gpl-license GNU Public License
  * @link       https://notchpay.co
  * @since      1.0.0
@@ -19,7 +19,7 @@
  *
  * @package    NotchPay_Give
  * @subpackage Gateways
- * @author     Chapdel <chapdel@notchpay.co>
+ * @author     Stephen <steve@notchpay.com>
  */
 class NotchPay_Give_Admin
 {
@@ -193,25 +193,44 @@ class NotchPay_Give_Admin
                         'id'   => 'give_title_notchpay',
                     ],
                     [
-                        'name'        => esc_html__( 'Sandbox Public Key', 'notchpay-give' ),
+                        'name'        => esc_html__( 'Test Public Key', 'notchpay-give' ),
                         'desc'        => esc_html__( 'Enter your Notch Pay Test Public Key', 'notchpay-give' ),
                         'id'          => 'notchpay_test_public_key',
-                        'type'        => 'password',
+                        'type'        => 'text',
                         'row_classes' => 'give-notchpay-test-public-key',
+                    ],
+                    [
+                        'name'        => esc_html__( 'Test Secret Key', 'notchpay-give' ),
+                        'desc'        => esc_html__( 'Enter your Notch Pay Test Secret Key', 'notchpay-give' ),
+                        'id'          => 'notchpay_test_secret_key',
+                        'type'        => 'text',
+                        'row_classes' => 'give-notchpay-test-secret-key',
                     ],
                     [
                         'name'        => esc_html__( 'Live Public Key', 'notchpay-give' ),
                         'desc'        => esc_html__( 'Enter your Notch Pay Live Public Key', 'notchpay-give' ),
                         'id'          => 'notchpay_live_public_key',
-                        'type'        => 'password',
+                        'type'        => 'text',
                         'row_classes' => 'give-notchpay-live-public-key',
                     ],
                     [
+                        'name'        => esc_html__( 'Live Secret Key', 'notchpay-give' ),
+                        'desc'        => esc_html__( 'Enter your Notch Pay Live Secret Key', 'notchpay-give' ),
+                        'id'          => 'notchpay_live_secret_key',
+                        'type'        => 'text',
+                        'row_classes' => 'give-notchpay-live-secret-key',
+                    ],
+                    
+                    [
                         'name'    => esc_html__( 'Billing Details', 'notchpay-give' ),
-                        'desc'    => esc_html__( 'This is not required by Notch Pay (except email)', 'notchpay-give' ),
+                        'desc'    => esc_html__( 'This will enable you to collect donor details. This is not required by Notch Pay (except email) but you might need to collect all information for record purposes', 'notchpay-give' ),
                         'id'      => 'notchpay_billing_details',
-                        'type'    => 'hidden',
+                        'type'    => 'radio_inline',
                         'default' => 'disabled',
+                        'options' => [
+                            'enabled'  => esc_html__( 'Enabled', 'notchpay-give' ),
+                            'disabled' => esc_html__( 'Disabled', 'notchpay-give' ),
+                        ],
                     ],
                     [
                         'type' => 'sectionend',
